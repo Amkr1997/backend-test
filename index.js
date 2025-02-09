@@ -19,6 +19,10 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
 
+app.get("/", (req, res) => {
+  res.send("Server Started");
+});
+
 // POST
 app.post("/post/cache", async (req, res) => {
   const { key, value } = req.body;
