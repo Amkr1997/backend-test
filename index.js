@@ -23,6 +23,8 @@ app.get("/", (req, res) => {
   res.send("Server Started");
 });
 
+const maxSize = process.env.MAX_SIZE || 9;
+
 // POST
 app.post("/post/cache", async (req, res) => {
   const { key, value } = req.body;
@@ -30,7 +32,7 @@ app.post("/post/cache", async (req, res) => {
   try {
     const allCacheVal = await Cache.find();
 
-    if (allCacheVal.length > 9) {
+    if (allCacheVal.length > maxSize) {
       return res
         .status(404)
         .json({ message: "Cannot store more than 10 values" });
